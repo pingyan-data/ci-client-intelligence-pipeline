@@ -15,18 +15,25 @@ helps prioritise which clients need attention by scoring each client on:
 - **Churn risk** — likelihood of reducing or exiting the relationship
 - **Cross-sell potential** — likelihood of taking on additional products
 
-ci-client-intelligence-pipeline/
-├── generate_ci_data.py   # Synthetic C&I client data generator
-├── train_model.py        # XGBoost churn model training + evaluation
-├── ci_clients.csv        # Generated dataset (500 clients)
-└── predictions.csv       # Model output with risk tiers
-
 ## Project structure
+
+    ci-client-intelligence-pipeline/
+    ├── generate_ci_data.py   # Synthetic C&I client data generator
+    ├── train_model.py        # XGBoost churn model training + evaluation
+    ├── ci_clients.csv        # Generated dataset (500 clients)
+    └── predictions.csv       # Model output with risk tiers
 
 ## Installation
 
 Clone the repository and set up a virtual environment:
 
+```bash
+git clone https://github.com/pingyan-data/ci-client-intelligence-pipeline.git
+cd ci-client-intelligence-pipeline
+python3 -m venv venv
+source venv/bin/activate
+pip install pandas scikit-learn xgboost shap
+```
 
 ## Usage
 
@@ -41,22 +48,6 @@ python generate_ci_data.py
 ```bash
 python train_model.py
 ```
-
-Loaded 500 client records.
-Train: 400 | Test: 100
-AUC Score: 0.665
-Classification Report:
-precision    recall  f1-score
-Retained       0.88      0.85      0.86
-Churned       0.28      0.33      0.30
-Top feature importances:
-last_rm_contact_days           ████████ 0.210
-industry_encoded               ██████ 0.166
-lending_utilization_pct        ██████ 0.153
-annual_revenue_sek             █████ 0.142
-fx_volume_3m_sek               ████ 0.120
-months_as_client               ████ 0.108
-num_products_held              ████ 0.100
 
 ## Key findings
 
